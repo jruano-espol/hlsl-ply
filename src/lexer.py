@@ -65,7 +65,7 @@ CONTROL_FLOW_KEYWORDS = {'if', 'else', 'switch', 'case', 'default', 'for', 'whil
 REGISTER_KEYWORD = 'register'
 RO_BUFFER_RESOURCE_KEYWORDS = {'Buffer', 'StructuredBuffer', 'ByteAddressBuffer', 'Texture1D', 'Texture1DArray', 'Texture2D', 'Texture2DArray', 'Texture2DMS', 'Texture2DMSArray', 'Texture3D', 'TextureCube', 'TextureCubeArray'}
 WO_BUFFER_RESOURCE_KEYWORDS = {'RWBuffer', 'RWStructuredBuffer', 'RWByteAddressBuffer', 'RWTexture1D', 'RWTexture1DArray', 'RWTexture2D', 'RWTexture2DArray', 'RWTexture3D'}
-SAMPLING_KEYWORDS = {'sampler'}
+SAMPLING_KEYWORDS = {'sampler', 'SamplerComparisonState', 'SamplerState'}
 BUFFER_CONSTANT_KEYWORDS = {'cbuffer', 'tbuffer'}
 CONVERSION_MODIFIER_KEYWORDS = {'unorm', 'snorm'}
 

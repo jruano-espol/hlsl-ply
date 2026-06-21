@@ -1,7 +1,8 @@
 import sys
 from preprocessor import Preprocessor
 from lexer import make_lexer
-from parser import parser
+from datetime import datetime
+
 
 def main():
     if len(sys.argv) != 2:
@@ -12,8 +13,12 @@ def main():
     lexer = make_lexer(preproc)
     if lexer.had_error:
         exit(1)
-    ast = parser.parse(lexer=lexer)
-    print(ast)
+    output_filename = datetime.now().strftime("lexico-AntonyRuano-%d-%m-%Y-%Hh%M.txt")
+    with open(f'logs/{output_filename}', 'w') as f:
+        print(f"Log generado a partir del archivo {file_path}\n", file=f)
+        for token in lexer:
+            print(token, file=f)
+
 
 if __name__ == "__main__":
     main()
