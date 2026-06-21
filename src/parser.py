@@ -68,10 +68,10 @@ class ExprUnaryPostfix:
         self.right = right
 
 class ExprAssignment:
-    def __init__(self, op: str, name: str, value: Expr):
+    def __init__(self, op: str, left: Expr, right: Expr):
         self.op = op
-        self.name = name
-        self.value = value
+        self.left = left
+        self.right = right
 
 class ExprFieldAccess:
     def __init__(self, left: Expr, right: Expr):
@@ -224,17 +224,17 @@ def p_expression_postfix_unary(p):
     p[0] = ExprUnaryPostfix(p[2], p[1])
 
 def p_expression_assignment(p):
-    '''expression : IDENTIFIER ASSIGN expression
-                  | IDENTIFIER PLUS_ASSIGN expression
-                  | IDENTIFIER MINUS_ASSIGN expression
-                  | IDENTIFIER MULTIPLY_ASSIGN expression
-                  | IDENTIFIER DIVIDE_ASSIGN expression
-                  | IDENTIFIER MODULO_ASSIGN expression
-                  | IDENTIFIER BITWISE_AND_ASSIGN expression
-                  | IDENTIFIER BITWISE_OR_ASSIGN expression
-                  | IDENTIFIER BITWISE_XOR_ASSIGN expression
-                  | IDENTIFIER L_SHIFT_ASSIGN expression
-                  | IDENTIFIER R_SHIFT_ASSIGN expression'''
+    '''expression : expression ASSIGN expression
+                  | expression PLUS_ASSIGN expression
+                  | expression MINUS_ASSIGN expression
+                  | expression MULTIPLY_ASSIGN expression
+                  | expression DIVIDE_ASSIGN expression
+                  | expression MODULO_ASSIGN expression
+                  | expression BITWISE_AND_ASSIGN expression
+                  | expression BITWISE_OR_ASSIGN expression
+                  | expression BITWISE_XOR_ASSIGN expression
+                  | expression L_SHIFT_ASSIGN expression
+                  | expression R_SHIFT_ASSIGN expression'''
     p[0] = ExprAssignment(p[2], p[1], p[3])
 
 def p_expression_cast(p):
