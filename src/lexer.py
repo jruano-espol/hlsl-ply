@@ -1,5 +1,10 @@
 import ply.lex as lex
-from preprocessor import Preprocessor
+
+had_error = False
+
+def had_lexer_error():
+    global had_error
+    return had_error
 
 # List of token names.
 tokens = [
@@ -65,7 +70,7 @@ CONTROL_FLOW_KEYWORDS = {'if', 'else', 'switch', 'case', 'default', 'for', 'whil
 REGISTER_KEYWORD = 'register'
 RO_BUFFER_RESOURCE_KEYWORDS = {'Buffer', 'StructuredBuffer', 'ByteAddressBuffer', 'Texture1D', 'Texture1DArray', 'Texture2D', 'Texture2DArray', 'Texture2DMS', 'Texture2DMSArray', 'Texture3D', 'TextureCube', 'TextureCubeArray'}
 WO_BUFFER_RESOURCE_KEYWORDS = {'RWBuffer', 'RWStructuredBuffer', 'RWByteAddressBuffer', 'RWTexture1D', 'RWTexture1DArray', 'RWTexture2D', 'RWTexture2DArray', 'RWTexture3D'}
-SAMPLING_KEYWORDS = {'sampler'}
+SAMPLING_KEYWORDS = {'sampler', 'SamplerState', 'SamplerComparisonState'}
 BUFFER_CONSTANT_KEYWORDS = {'cbuffer', 'tbuffer'}
 CONVERSION_MODIFIER_KEYWORDS = {'unorm', 'snorm'}
 
@@ -169,26 +174,25 @@ def t_INT_LITERAL(t):
     return t
 
 def t_error(t):
-    print(f"ERROR at {t.lexer.source_path}:{t.lexer.lineno}: Illegal character '{t.value[0]}'.")
-    t.lexer.had_error = True
+    global had_error
+    had_error = True
+    print(f"LEXICAL ERROR at {t.lexer.source_path}:{t.lexer.lineno}: Illegal character '{t.value[0]}'.")
     t.lexer.skip(1)
 
 t_ignore = ' \t\v\f'
 
-def make_lexer(preprocessor: Preprocessor):
+def make_lexer(path: str, source_code: str):
     lexer = lex.lex()
-    lexer.source_path = preprocessor.path
-    lexer.had_error = False
-    lexer.input(preprocessor.get_expanded_source_code())
+    lexer.source_path = path
+    lexer.input(source_code)
     return lexer
 
-def get_bar_separated_type_keywords():
+def get_bar_separated_builtin_types():
+    '''Intentionally leaves out the templated types. Those are handled differently'''
     sep = '\n | '
     result = ''
     result += sep.join([x.upper() for x in PRIMITIVE_TYPE_KEYWORDS]) + sep
     result += sep.join([x.upper() for x in VECTOR_TYPE_KEYWORDS]) + sep
     result += sep.join([x.upper() for x in MATRIX_TYPE_KEYWORDS]) + sep
-    result += sep.join([x.upper() for x in RO_BUFFER_RESOURCE_KEYWORDS]) + sep
-    result += sep.join([x.upper() for x in WO_BUFFER_RESOURCE_KEYWORDS]) + sep
     result += sep.join([x.upper() for x in SAMPLING_KEYWORDS])
     return result
