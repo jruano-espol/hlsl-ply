@@ -284,26 +284,29 @@ void ShadeLights(inout float3 colorSum, uint2 pixelPos,
 
     // sphere
     uint n;
-    for (n = 0; n < tileLightCountSphere; n++, tileLightLoadOffset += 4)
+    for (n = 0; n < tileLightCountSphere; n++)
     {
         uint lightIndex = lightGrid.Load(tileLightLoadOffset);
         LightData lightData = lightBuffer[lightIndex];
         colorSum += ApplyPointLight(POINT_LIGHT_ARGS);
+        tileLightLoadOffset += 4;
     }
 
     // cone
-    for (n = 0; n < tileLightCountCone; n++, tileLightLoadOffset += 4)
+    for (n = 0; n < tileLightCountCone; n++)
     {
         uint lightIndex = lightGrid.Load(tileLightLoadOffset);
         LightData lightData = lightBuffer[lightIndex];
         colorSum += ApplyConeLight(CONE_LIGHT_ARGS);
+        tileLightLoadOffset += 4;
     }
 
     // cone w/ shadow map
-    for (n = 0; n < tileLightCountConeShadowed; n++, tileLightLoadOffset += 4)
+    for (n = 0; n < tileLightCountConeShadowed; n++)
     {
         uint lightIndex = lightGrid.Load(tileLightLoadOffset);
         LightData lightData = lightBuffer[lightIndex];
         colorSum += ApplyConeShadowedLight(SHADOWED_LIGHT_ARGS);
+        tileLightLoadOffset += 4;
     }
 }

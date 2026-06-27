@@ -22,7 +22,7 @@ struct VSOutput
 Texture2D<float4> baseColorTexture : register(t0);
 SamplerState baseColorSampler : register(s0);
 
-cbuffer MaterialConstants : register(b0)
+cbuffer MaterialConstants : register(b0, space0)
 {
     float4 baseColorFactor;
     float3 emissiveFactor;

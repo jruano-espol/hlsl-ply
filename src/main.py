@@ -18,7 +18,7 @@ def main():
     if had_parser_error():
         pretty_print_preprocessed(source_code)
         exit(1)
-    print(ast)
+    print("\nSUCCESS: The code has no errors.")
 
 def pretty_print_preprocessed(source_code: str):
     print("")

@@ -161,16 +161,18 @@ def t_STRING_LITERAL(t):
     return t
 
 def t_FLOAT_LITERAL(t):
-    r'\d+\.\d+([eE][+-]?\d+)?'
+    r'\d+\.\d+([eE][+-]?\d+)?|\d+[eE][+-]?\d+'
     t.value = float(t.value)
     return t
 
 def t_INT_LITERAL(t):
-    r'(0[xX][0-9a-fA-F]+|\d+)'
+    r'(0[xX][0-9a-fA-F]+|\d+)u?'
+    base = 10
     if t.value.lower().startswith('0x'):
-        t.value = int(t.value, 16)
-    else:
-        t.value = int(t.value, 10)
+        base = 16
+    if t.value.endswith('u'):
+        t.value = t.value[:len(t.value)-1]
+    t.value = int(t.value, base)
     return t
 
 def t_error(t):
@@ -187,12 +189,20 @@ def make_lexer(path: str, source_code: str):
     lexer.input(source_code)
     return lexer
 
-def get_bar_separated_builtin_types():
+def get_builtin_type_docstr():
     '''Intentionally leaves out the templated types. Those are handled differently'''
     sep = '\n | '
     result = ''
     result += sep.join([x.upper() for x in PRIMITIVE_TYPE_KEYWORDS]) + sep
     result += sep.join([x.upper() for x in VECTOR_TYPE_KEYWORDS]) + sep
     result += sep.join([x.upper() for x in MATRIX_TYPE_KEYWORDS]) + sep
-    result += sep.join([x.upper() for x in SAMPLING_KEYWORDS])
+    result += sep.join([x.upper() for x in SAMPLING_KEYWORDS]) + sep
+    result += sep.join(['BYTEADDRESSBUFFER', 'RWBYTEADDRESSBUFFER'])
+    return result
+
+def get_constructable_type_docstr():
+    sep = '\n | '
+    result = ''
+    result += sep.join([x.upper() for x in VECTOR_TYPE_KEYWORDS]) + sep
+    result += sep.join([x.upper() for x in MATRIX_TYPE_KEYWORDS]) + sep
     return result

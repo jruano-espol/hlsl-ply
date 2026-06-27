@@ -12,8 +12,8 @@
 //
 
 // keep in sync with C code
-#define MAX_LIGHTS 128
-#define TILE_SIZE (4 + MAX_LIGHTS * 4)
+const int MAX_LIGHTS = 128;
+const int TILE_SIZE = (4 + MAX_LIGHTS * 4);
 
 struct LightData
 {
