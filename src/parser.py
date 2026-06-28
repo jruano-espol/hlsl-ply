@@ -51,6 +51,7 @@ type Expr = (
     ExprFunctionCall |
     ExprConstructorCall |
     ExprCast |
+    ExprArrayLit |
     ExprStringLit |
     ExprFloatLit |
     ExprIntLit |
@@ -111,8 +112,12 @@ class FuncParam:
         self.semantic_label = semantic_label
 
 class StructField:
-    def __init__(self, conversion_modifier: str|None, type: Type, name: str, semantic_label: str|None):
-        self.conversion_modifier = conversion_modifier
+    def __init__(self,
+                 interpolation_modifier: str|None,
+                 type: Type,
+                 name: str,
+                 semantic_label: str|None):
+        self.interpolation_modifier = interpolation_modifier
         self.type = type
         self.name = name
         self.semantic_label = semantic_label
@@ -135,6 +140,9 @@ class CaseBranch:
         self.expr = expr
         self.statements = statements
 
+def empty_list_or(x):
+    return x if x is not None else []
+    
 # Expressions
 # ------------------------------------------------------------------------------------------------- #
 
@@ -195,6 +203,10 @@ class ExprCast:
     def __init__(self, type: Type, value: Expr):
         self.type = type
         self.value = value
+
+class ExprArrayLit:
+    def __init__(self, elements: list[Expr]):
+        self.elements = elements
 
 class ExprStringLit:
     def __init__(self, value: Expr):
@@ -288,10 +300,17 @@ class StmtNamespace:
         self.statements = statements
 
 class StmtVarDef:
-    def __init__(self, flags: VariableFlags, type: Type, name: str, binding: ResourceBinding|None, initializer: Expr|None):
+    def __init__(self,
+                 flags: VariableFlags,
+                 type: Type,
+                 name: str,
+                 array_size: int|None,
+                 binding: ResourceBinding|None,
+                 initializer: Expr|None):
         self.flags = flags
         self.type = type
         self.name = name
+        self.array_size = array_size
         self.binding = binding
         self.initializer = initializer
 
@@ -327,8 +346,8 @@ def p_program(p):
 
 def p_opt_statement_list(p):
     '''opt_statement_list : statement_list
-                          | empty_list'''
-    p[0] = p[1]
+                          | empty'''
+    p[0] = empty_list_or(p[1])
 
 def p_statement_list(p):
     '''statement_list : statement
@@ -414,8 +433,8 @@ def p_statement_for(p):
 
 def p_opt_namespace_stmt_list(p):
     '''opt_namespace_stmt_list : namespace_stmt_list
-                               | empty_list'''
-    p[0] = p[1]
+                               | empty'''
+    p[0] = empty_list_or(p[1])
 
 def p_namespace_stmt_list(p):
     '''namespace_stmt_list : namespace_stmt_list namespace_stmt'''
@@ -438,8 +457,8 @@ def p_switch_header(p):
 
 def p_opt_switch_case_list(p):
     '''opt_switch_case_list : switch_case_list
-                            | empty_list'''
-    p[0] = p[1]
+                            | empty'''
+    p[0] = empty_list_or(p[1])
 
 def p_switch_case_list(p):
     '''switch_case_list : switch_case_list switch_case'''
@@ -468,8 +487,8 @@ def p_if_branch(p):
 
 def p_opt_else_if_list(p):
     '''opt_else_if_list : else_if_list
-                        | empty_list'''
-    p[0] = p[1]
+                        | empty'''
+    p[0] = empty_list_or(p[1])
 
 def p_else_if_list(p):
     '''else_if_list : else_if_list else_if_branch'''
@@ -512,20 +531,20 @@ def p_variable_declaration_or_definition(p):
     p[0] = p[1]
 
 def p_variable_declaration(p):
-    '''var_decl : any_type IDENTIFIER opt_resource_binding
-                | var_flag_list any_type IDENTIFIER opt_resource_binding'''
-    if len(p) == 4:
-        p[0] = StmtVarDef(None, p[1], p[2], p[3], None)
+    '''var_decl : any_type IDENTIFIER opt_array_decl opt_resource_binding
+                | var_flag_list any_type IDENTIFIER opt_array_decl opt_resource_binding'''
+    if len(p[1:]) == 4:
+        p[0] = StmtVarDef(None, p[1], p[2], p[3], p[4], None)
     else:
-        p[0] = StmtVarDef(p[1], p[2], p[3], p[4], None)
+        p[0] = StmtVarDef(p[1], p[2], p[3], p[4], p[5], None)
 
 def p_variable_definition(p):
-    '''var_def : any_type IDENTIFIER ASSIGN expression
-               | var_flag_list any_type IDENTIFIER ASSIGN expression'''
-    if len(p) == 5:
-        p[0] = StmtVarDef(None, p[1], p[2], None, p[4])
+    '''var_def : any_type IDENTIFIER opt_array_decl ASSIGN expression
+               | var_flag_list any_type IDENTIFIER opt_array_decl ASSIGN expression'''
+    if len(p[1:]) == 5:
+        p[0] = StmtVarDef(None, p[1], p[2], p[3], None, p[5])
     else:
-        p[0] = StmtVarDef(p[1], p[2], p[3], None, p[5])
+        p[0] = StmtVarDef(p[1], p[2], p[3], p[4], None, p[6])
 
 def p_var_flag_list(p):
     '''var_flag_list : var_flag_list var_flag
@@ -557,8 +576,8 @@ def p_input_modifier(p):
 
 def p_opt_parameter_list(p):
     '''opt_parameter_list : parameter_list
-                          | empty_list'''
-    p[0] = p[1]
+                          | empty'''
+    p[0] = empty_list_or(p[1])
 
 def p_parameter_list(p):
     '''parameter_list : parameter_list COMMA parameter
@@ -574,8 +593,8 @@ def p_parameter(p):
 
 def p_opt_struct_field_list(p):
     '''opt_struct_field_list : struct_field_list
-                             | empty_list'''
-    p[0] = p[1]
+                             | empty'''
+    p[0] = empty_list_or(p[1])
 
 def p_struct_field_list_single(p):
     '''struct_field_list : struct_field SEMICOLON'''
@@ -586,17 +605,20 @@ def p_struct_field_list_many(p):
     p[0] = p[1] + [p[2]]
 
 def p_struct_field(p):
-    '''struct_field : opt_conversion_modifier any_type IDENTIFIER opt_semantic_label'''
+    '''struct_field : opt_interpolation_modifier any_type IDENTIFIER opt_semantic_label'''
     p[0] = StructField(p[1], p[2], p[3], p[4])
 
-def p_opt_conversion_modifier(p):
-    '''opt_conversion_modifier : conversion_modifier
-                               | empty'''
+def p_opt_interpolation_modifier(p):
+    '''opt_interpolation_modifier : interpolation_modifier
+                                  | empty'''
     p[0] = p[1]
 
-def p_conversion_modifier(p):
-    '''conversion_modifier : UNORM
-                           | SNORM'''
+def p_interpolation_modifier(p):
+    '''interpolation_modifier : LINEAR
+                              | CENTROID
+                              | NOINTERPOLATION
+                              | NOPERSPECTIVE
+                              | SAMPLE'''
     p[0] = p[1]
 
 def p_scope(p):
@@ -610,8 +632,8 @@ def p_buffer_type(p):
 
 def p_opt_buffer_field_list(p):
     '''opt_buffer_field_list : buffer_field_list
-                             | empty_list'''
-    p[0] = p[1]
+                             | empty'''
+    p[0] = empty_list_or(p[1])
 
 def p_buffer_field_list_single(p):
     '''buffer_field_list : buffer_field SEMICOLON'''
@@ -647,7 +669,12 @@ def p_templated_container(p):
     p[0] = p[1]
 
 def p_builtin_type(p):
-    p[0] = BuiltinType(p[1])
+    if len(p[1:]) == 1:
+        p[0] = BuiltinType(p[1])
+    else:
+        assert len(p[1:]) == 2
+        assert p[1] in ['unorm', 'snorm']
+        p[0] = BuiltinType(f"{p[1]} {p[2]}")
 
 p_builtin_type.__doc__ = f'builtin_type : {get_builtin_type_docstr()}'
 
@@ -734,13 +761,31 @@ def p_opt_semantic_label_empty(p):
     '''opt_semantic_label : empty'''
     p[0] = p[1]
 
+def p_opt_argument_list(p):
+    '''opt_argument_list : argument_list
+                         | empty'''
+    p[0] = empty_list_or(p[1])
+
+def p_argument_list(p):
+    '''argument_list : argument_list COMMA expression
+                     | expression'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
+
+def p_opt_array_decl(p):
+    '''opt_array_decl : array_decl
+                      | empty'''
+    p[0] = p[1]
+
+def p_array_decl(p):
+    '''array_decl : L_SQUARE_BRACKET INT_LITERAL R_SQUARE_BRACKET'''
+    p[0] = p[2]
+
 def p_empty(p):
     '''empty :'''
     p[0] = None
-
-def p_empty_list(p):
-    '''empty_list :'''
-    p[0] = []
 
 # Expression parsing functions
 # ------------------------------------------------------------------------------------------------- #
@@ -826,18 +871,13 @@ def p_expression_constructor_call(p):
     '''expression : constructable_type L_PAREN opt_argument_list R_PAREN %prec FUNCTION_CALL'''
     p[0] = ExprConstructorCall(p[1], p[3])
 
-def p_opt_argument_list(p):
-    '''opt_argument_list : argument_list
-                         | empty_list'''
-    p[0] = p[1]
+def p_expression_array_lit(p):
+    '''expression : L_CURLY_BRACE argument_list R_CURLY_BRACE'''
+    p[0] = ExprArrayLit(p[2])
 
-def p_argument_list(p):
-    '''argument_list : argument_list COMMA expression
-                     | expression'''
-    if len(p) == 2:
-        p[0] = [p[1]]
-    else:
-        p[0] = p[1] + [p[3]]
+def p_expression_array_lit_empty(p):
+    '''expression : L_CURLY_BRACE R_CURLY_BRACE'''
+    p[0] = ExprArrayLit([])
 
 def p_expression_string_lit(p):
     '''expression : STRING_LITERAL'''

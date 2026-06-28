@@ -73,6 +73,7 @@ WO_BUFFER_RESOURCE_KEYWORDS = {'RWBuffer', 'RWStructuredBuffer', 'RWByteAddressB
 SAMPLING_KEYWORDS = {'sampler', 'SamplerState', 'SamplerComparisonState'}
 BUFFER_CONSTANT_KEYWORDS = {'cbuffer', 'tbuffer'}
 CONVERSION_MODIFIER_KEYWORDS = {'unorm', 'snorm'}
+INTERPOLATION_MODIFIERS = {'linear', 'centroid', 'nointerpolation', 'noperspective', 'sample'}
 
 keywords = set()
 keywords.update(PRIMITIVE_TYPE_KEYWORDS)
@@ -89,6 +90,7 @@ keywords.update(WO_BUFFER_RESOURCE_KEYWORDS)
 keywords.update(SAMPLING_KEYWORDS)
 keywords.update(BUFFER_CONSTANT_KEYWORDS)
 keywords.update(CONVERSION_MODIFIER_KEYWORDS)
+keywords.update(INTERPOLATION_MODIFIERS)
 tokens.extend([x.upper() for x in keywords])
 
 # Regular expression rules for tokens.
@@ -197,7 +199,15 @@ def get_builtin_type_docstr():
     result += sep.join([x.upper() for x in VECTOR_TYPE_KEYWORDS]) + sep
     result += sep.join([x.upper() for x in MATRIX_TYPE_KEYWORDS]) + sep
     result += sep.join([x.upper() for x in SAMPLING_KEYWORDS]) + sep
-    result += sep.join(['BYTEADDRESSBUFFER', 'RWBYTEADDRESSBUFFER'])
+    result += sep.join(['BYTEADDRESSBUFFER', 'RWBYTEADDRESSBUFFER']) + sep
+
+    float_types = ['FLOAT', 'FLOAT2', 'FLOAT3', 'FLOAT4']
+    unorm_float_types = [f'UNORM {t}' for t in float_types]
+    snorm_float_types = [f'SNORM {t}' for t in float_types]
+
+    result += sep.join(unorm_float_types) + sep
+    result += sep.join(snorm_float_types)
+
     return result
 
 def get_constructable_type_docstr():
