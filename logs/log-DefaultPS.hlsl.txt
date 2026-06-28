@@ -1,0 +1,2523 @@
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'defaultSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 10
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerComparisonState'
+  name: 'shadowSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 11
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'cubeMapSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 12
+      space: 0
+  initializer: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'HashTriangleID'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 2
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Min3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Med3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Max3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '|'
+          left:
+            ExprBinary
+              op: '|'
+              left:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I2'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 16
+              right:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I1'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 8
+          right:
+            ExprBinary
+              op: '&'
+              left:
+                ExprIdentifier
+                  name: 'I0'
+              right:
+                ExprIntLit
+                  value: 4278190335
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float4'
+  name: 'baseColorTexture'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 0
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'metallicRoughnessTexture'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 1
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        UserDefinedType
+          name: 'float1'
+  name: 'occlusionTexture'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 2
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'emissiveTexture'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 3
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'normalTexture'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 4
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'baseColorSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 0
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'metallicRoughnessSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 1
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'occlusionSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 2
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'emissiveSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 3
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'normalSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 4
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'TextureCube'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'radianceIBLTexture'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 10
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'TextureCube'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'irradianceIBLTexture'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 11
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float'
+  name: 'texSSAO'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 12
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float'
+  name: 'texSunShadow'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 13
+      space: 0
+  initializer: None
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'MaterialConstants'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 0
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'baseColorFactor'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'emissiveFactor'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'normalTextureScale'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'metallicRoughnessFactor'
+    BufferField
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'flags'
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'GlobalConstants'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 1
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'ViewProj'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'SunShadowMatrix'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'ViewerPos'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'SunDirection'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'SunIntensity'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float'
+      name: '_pad'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'IBLRange'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'IBLBias'
+StmtStructDef
+  name: 'VSOutput'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'position'
+      semantic_label: 'SV_POSITION'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: 'NORMAL'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'tangent'
+      semantic_label: 'TANGENT'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'uv0'
+      semantic_label: 'TEXCOORD0'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      semantic_label: 'TEXCOORD2'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'sunShadowCoord'
+      semantic_label: 'TEXCOORD3'
+StmtVarDef
+  flags: 3
+  type:
+    BuiltinType
+      name: 'float'
+  name: 'PI'
+  array_size: None
+  binding: None
+  initializer:
+    ExprFloatLit
+      value: 3.14159265
+StmtVarDef
+  flags: 3
+  type:
+    BuiltinType
+      name: 'float3'
+  name: 'kDielectricSpecular'
+  array_size: None
+  binding: None
+  initializer:
+    ExprConstructorCall
+      type:
+        BuiltinType
+          name: 'float3'
+      args:
+        ExprFloatLit
+          value: 0.04
+        ExprFloatLit
+          value: 0.04
+        ExprFloatLit
+          value: 0.04
+StmtVarDef
+  flags: 3
+  type:
+    BuiltinType
+      name: 'uint'
+  name: 'BASECOLOR'
+  array_size: None
+  binding: None
+  initializer:
+    ExprIntLit
+      value: 0
+StmtVarDef
+  flags: 3
+  type:
+    BuiltinType
+      name: 'uint'
+  name: 'METALLICROUGHNESS'
+  array_size: None
+  binding: None
+  initializer:
+    ExprIntLit
+      value: 1
+StmtVarDef
+  flags: 3
+  type:
+    BuiltinType
+      name: 'uint'
+  name: 'OCCLUSION'
+  array_size: None
+  binding: None
+  initializer:
+    ExprIntLit
+      value: 2
+StmtVarDef
+  flags: 3
+  type:
+    BuiltinType
+      name: 'uint'
+  name: 'EMISSIVE'
+  array_size: None
+  binding: None
+  initializer:
+    ExprIntLit
+      value: 3
+StmtVarDef
+  flags: 3
+  type:
+    BuiltinType
+      name: 'uint'
+  name: 'NORMAL'
+  array_size: None
+  binding: None
+  initializer:
+    ExprIntLit
+      value: 4
+StmtStructDef
+  name: 'SurfaceProperties'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'N'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'V'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'c_diff'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'c_spec'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'roughness'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'alpha'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'alphaSqr'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'NdotV'
+      semantic_label: None
+StmtStructDef
+  name: 'LightProperties'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'L'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'NdotL'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'LdotH'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'NdotH'
+      semantic_label: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float2'
+  name: 'UVSET'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'offset'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprFieldAccess
+          left:
+            ExprIdentifier
+              name: 'vsOutput'
+          field_name: 'uv0'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float'
+  name: 'Pow5'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'x'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'xSq'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'x'
+          right:
+            ExprIdentifier
+              name: 'x'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'xSq'
+              right:
+                ExprIdentifier
+                  name: 'xSq'
+          right:
+            ExprIdentifier
+              name: 'x'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'Fresnel_Shlick'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'F0'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'F90'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'cosine'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'lerp'
+          args:
+            ExprIdentifier
+              name: 'F0'
+            ExprIdentifier
+              name: 'F90'
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'Pow5'
+              args:
+                ExprBinary
+                  op: '-'
+                  left:
+                    ExprFloatLit
+                      value: 1.0
+                  right:
+                    ExprIdentifier
+                      name: 'cosine'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float'
+  name: 'Fresnel_Shlick'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'F0'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'F90'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'cosine'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'lerp'
+          args:
+            ExprIdentifier
+              name: 'F0'
+            ExprIdentifier
+              name: 'F90'
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'Pow5'
+              args:
+                ExprBinary
+                  op: '-'
+                  left:
+                    ExprFloatLit
+                      value: 1.0
+                  right:
+                    ExprIdentifier
+                      name: 'cosine'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'Diffuse_Burley'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'LightProperties'
+      name: 'Light'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'fd90'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '+'
+          left:
+            ExprFloatLit
+              value: 0.5
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprBinary
+                      op: '*'
+                      left:
+                        ExprFloatLit
+                          value: 2.0
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Surface'
+                          field_name: 'roughness'
+                  right:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Light'
+                      field_name: 'LdotH'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Light'
+                  field_name: 'LdotH'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'c_diff'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'Fresnel_Shlick'
+                      args:
+                        ExprIntLit
+                          value: 1
+                        ExprIdentifier
+                          name: 'fd90'
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Light'
+                          field_name: 'NdotL'
+                  field_name: 'x'
+          right:
+            ExprFieldAccess
+              left:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'Fresnel_Shlick'
+                  args:
+                    ExprIntLit
+                      value: 1
+                    ExprIdentifier
+                      name: 'fd90'
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Surface'
+                      field_name: 'NdotV'
+              field_name: 'x'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float'
+  name: 'Specular_D_GGX'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'LightProperties'
+      name: 'Light'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'lower'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'lerp'
+          args:
+            ExprIntLit
+              value: 1
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'alphaSqr'
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Light'
+                  field_name: 'NdotH'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Light'
+                  field_name: 'NdotH'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '/'
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'alphaSqr'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'max'
+              args:
+                ExprFloatLit
+                  value: 1e-06
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprBinary
+                      op: '*'
+                      left:
+                        ExprIdentifier
+                          name: 'PI'
+                      right:
+                        ExprIdentifier
+                          name: 'lower'
+                  right:
+                    ExprIdentifier
+                      name: 'lower'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float'
+  name: 'G_Schlick_Smith'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'LightProperties'
+      name: 'Light'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '/'
+          left:
+            ExprFloatLit
+              value: 1.0
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'max'
+              args:
+                ExprFloatLit
+                  value: 1e-06
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'lerp'
+                      args:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Surface'
+                          field_name: 'NdotV'
+                        ExprIntLit
+                          value: 1
+                        ExprBinary
+                          op: '*'
+                          left:
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'Surface'
+                              field_name: 'alpha'
+                          right:
+                            ExprFloatLit
+                              value: 0.5
+                  right:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'lerp'
+                      args:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Light'
+                          field_name: 'NdotL'
+                        ExprIntLit
+                          value: 1
+                        ExprBinary
+                          op: '*'
+                          left:
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'Surface'
+                              field_name: 'alpha'
+                          right:
+                            ExprFloatLit
+                              value: 0.5
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float'
+  name: 'G_Shlick_Smith_Hable'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'LightProperties'
+      name: 'Light'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '/'
+          left:
+            ExprFloatLit
+              value: 1.0
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'lerp'
+              args:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Light'
+                      field_name: 'LdotH'
+                  right:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Light'
+                      field_name: 'LdotH'
+                ExprIntLit
+                  value: 1
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Surface'
+                      field_name: 'alphaSqr'
+                  right:
+                    ExprFloatLit
+                      value: 0.25
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'Specular_BRDF'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'LightProperties'
+      name: 'Light'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'ND'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'Specular_D_GGX'
+          args:
+            ExprIdentifier
+              name: 'Surface'
+            ExprIdentifier
+              name: 'Light'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'GV'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'G_Shlick_Smith_Hable'
+          args:
+            ExprIdentifier
+              name: 'Surface'
+            ExprIdentifier
+              name: 'Light'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'F'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'Fresnel_Shlick'
+          args:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'c_spec'
+            ExprFloatLit
+              value: 1.0
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Light'
+              field_name: 'LdotH'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'ND'
+              right:
+                ExprIdentifier
+                  name: 'GV'
+          right:
+            ExprIdentifier
+              name: 'F'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ShadeDirectionalLight'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'L'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'c_light'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'LightProperties'
+      name: 'Light'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Light'
+              field_name: 'L'
+          right:
+            ExprIdentifier
+              name: 'L'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'H'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'normalize'
+          args:
+            ExprBinary
+              op: '+'
+              left:
+                ExprIdentifier
+                  name: 'L'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'V'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Light'
+              field_name: 'NdotL'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'saturate'
+              args:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'dot'
+                  args:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Surface'
+                      field_name: 'N'
+                    ExprIdentifier
+                      name: 'L'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Light'
+              field_name: 'LdotH'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'saturate'
+              args:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'dot'
+                  args:
+                    ExprIdentifier
+                      name: 'L'
+                    ExprIdentifier
+                      name: 'H'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Light'
+              field_name: 'NdotH'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'saturate'
+              args:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'dot'
+                  args:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Surface'
+                      field_name: 'N'
+                    ExprIdentifier
+                      name: 'H'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuse'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'Diffuse_Burley'
+          args:
+            ExprIdentifier
+              name: 'Surface'
+            ExprIdentifier
+              name: 'Light'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specular'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'Specular_BRDF'
+          args:
+            ExprIdentifier
+              name: 'Surface'
+            ExprIdentifier
+              name: 'Light'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Light'
+                  field_name: 'NdotL'
+              right:
+                ExprIdentifier
+                  name: 'c_light'
+          right:
+            ExprBinary
+              op: '+'
+              left:
+                ExprIdentifier
+                  name: 'diffuse'
+              right:
+                ExprIdentifier
+                  name: 'specular'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'Diffuse_IBL'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'LdotH'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'saturate'
+          args:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'dot'
+              args:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'N'
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'normalize'
+                  args:
+                    ExprBinary
+                      op: '+'
+                      left:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Surface'
+                          field_name: 'N'
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Surface'
+                          field_name: 'V'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'fd90'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '+'
+          left:
+            ExprFloatLit
+              value: 0.5
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprBinary
+                      op: '*'
+                      left:
+                        ExprFloatLit
+                          value: 2.0
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Surface'
+                          field_name: 'roughness'
+                  right:
+                    ExprIdentifier
+                      name: 'LdotH'
+              right:
+                ExprIdentifier
+                  name: 'LdotH'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'DiffuseBurley'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'c_diff'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'Fresnel_Shlick'
+              args:
+                ExprIntLit
+                  value: 1
+                ExprIdentifier
+                  name: 'fd90'
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'NdotV'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'DiffuseBurley'
+          right:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'irradianceIBLTexture'
+                  field_name: 'Sample'
+              args:
+                ExprIdentifier
+                  name: 'defaultSampler'
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'N'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'Specular_IBL'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'lod'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '+'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'roughness'
+              right:
+                ExprIdentifier
+                  name: 'IBLRange'
+          right:
+            ExprIdentifier
+              name: 'IBLBias'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specular'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'Fresnel_Shlick'
+          args:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'c_spec'
+            ExprIntLit
+              value: 1
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'NdotV'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'specular'
+          right:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'radianceIBLTexture'
+                  field_name: 'SampleLevel'
+              args:
+                ExprIdentifier
+                  name: 'cubeMapSampler'
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'reflect'
+                  args:
+                    ExprUnary
+                      op: '-'
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'Surface'
+                          field_name: 'V'
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Surface'
+                      field_name: 'N'
+                ExprIdentifier
+                  name: 'lod'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ComputeNormal'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'VSOutput'
+      name: 'vsOutput'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'normalize'
+          args:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'normal'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'tangent'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'normalize'
+          args:
+            ExprFieldAccess
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsOutput'
+                  field_name: 'tangent'
+              field_name: 'xyz'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'bitangent'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'normalize'
+              args:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'cross'
+                  args:
+                    ExprIdentifier
+                      name: 'normal'
+                    ExprIdentifier
+                      name: 'tangent'
+          right:
+            ExprFieldAccess
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsOutput'
+                  field_name: 'tangent'
+              field_name: 'w'
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'float3x3'
+      name: 'tangentFrame'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'float3x3'
+          args:
+            ExprIdentifier
+              name: 'tangent'
+            ExprIdentifier
+              name: 'bitangent'
+            ExprIdentifier
+              name: 'normal'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'normal'
+          right:
+            ExprBinary
+              op: '-'
+              left:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprFunctionCall
+                      left:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'normalTexture'
+                          field_name: 'Sample'
+                      args:
+                        ExprIdentifier
+                          name: 'normalSampler'
+                        ExprFunctionCall
+                          left:
+                            ExprIdentifier
+                              name: 'UVSET'
+                          args:
+                            ExprIdentifier
+                              name: 'NORMAL'
+                  right:
+                    ExprFloatLit
+                      value: 2.0
+              right:
+                ExprFloatLit
+                  value: 1.0
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'normal'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'normalize'
+              args:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprIdentifier
+                      name: 'normal'
+                  right:
+                    ExprConstructorCall
+                      type:
+                        BuiltinType
+                          name: 'float3'
+                      args:
+                        ExprIdentifier
+                          name: 'normalTextureScale'
+                        ExprIdentifier
+                          name: 'normalTextureScale'
+                        ExprIntLit
+                          value: 1
+    StmtReturn
+      value:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'mul'
+          args:
+            ExprIdentifier
+              name: 'normal'
+            ExprIdentifier
+              name: 'tangentFrame'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float4'
+  name: 'main'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'VSOutput'
+      name: 'vsOutput'
+      semantic_label: None
+  semantic_label: 'SV_Target0'
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'baseColor'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'baseColorFactor'
+          right:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'baseColorTexture'
+                  field_name: 'Sample'
+              args:
+                ExprIdentifier
+                  name: 'baseColorSampler'
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'UVSET'
+                  args:
+                    ExprIdentifier
+                      name: 'BASECOLOR'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'metallicRoughness'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'metallicRoughnessFactor'
+          right:
+            ExprFieldAccess
+              left:
+                ExprFunctionCall
+                  left:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'metallicRoughnessTexture'
+                      field_name: 'Sample'
+                  args:
+                    ExprIdentifier
+                      name: 'metallicRoughnessSampler'
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'UVSET'
+                      args:
+                        ExprIdentifier
+                          name: 'METALLICROUGHNESS'
+              field_name: 'bg'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'occlusion'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'occlusionTexture'
+              field_name: 'Sample'
+          args:
+            ExprIdentifier
+              name: 'occlusionSampler'
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'UVSET'
+              args:
+                ExprIdentifier
+                  name: 'OCCLUSION'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'emissive'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'emissiveFactor'
+          right:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'emissiveTexture'
+                  field_name: 'Sample'
+              args:
+                ExprIdentifier
+                  name: 'emissiveSampler'
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'UVSET'
+                  args:
+                    ExprIdentifier
+                      name: 'EMISSIVE'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'ComputeNormal'
+          args:
+            ExprIdentifier
+              name: 'vsOutput'
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'SurfaceProperties'
+      name: 'Surface'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'N'
+          right:
+            ExprIdentifier
+              name: 'normal'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'V'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'normalize'
+              args:
+                ExprBinary
+                  op: '-'
+                  left:
+                    ExprIdentifier
+                      name: 'ViewerPos'
+                  right:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'vsOutput'
+                      field_name: 'worldPos'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'NdotV'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'saturate'
+              args:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'dot'
+                  args:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Surface'
+                      field_name: 'N'
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'Surface'
+                      field_name: 'V'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'c_diff'
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprBinary
+                      op: '*'
+                      left:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'baseColor'
+                          field_name: 'rgb'
+                      right:
+                        ExprBinary
+                          op: '-'
+                          left:
+                            ExprIntLit
+                              value: 1
+                          right:
+                            ExprIdentifier
+                              name: 'kDielectricSpecular'
+                  right:
+                    ExprBinary
+                      op: '-'
+                      left:
+                        ExprIntLit
+                          value: 1
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'metallicRoughness'
+                          field_name: 'x'
+              right:
+                ExprIdentifier
+                  name: 'occlusion'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'c_spec'
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'lerp'
+                  args:
+                    ExprIdentifier
+                      name: 'kDielectricSpecular'
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'baseColor'
+                      field_name: 'rgb'
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'metallicRoughness'
+                      field_name: 'x'
+              right:
+                ExprIdentifier
+                  name: 'occlusion'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'roughness'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'metallicRoughness'
+              field_name: 'y'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'alpha'
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'metallicRoughness'
+                  field_name: 'y'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'metallicRoughness'
+                  field_name: 'y'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'alphaSqr'
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'alpha'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'Surface'
+                  field_name: 'alpha'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'colorAccum'
+      array_size: None
+      binding: None
+      initializer:
+        ExprIdentifier
+          name: 'emissive'
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'uint2'
+      name: 'pixelPos'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'uint2'
+          args:
+            ExprFieldAccess
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsOutput'
+                  field_name: 'position'
+              field_name: 'xy'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'ssao'
+      array_size: None
+      binding: None
+      initializer:
+        ExprArraySubscript
+          left:
+            ExprIdentifier
+              name: 'texSSAO'
+          right:
+            ExprIdentifier
+              name: 'pixelPos'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '*='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'c_diff'
+          right:
+            ExprIdentifier
+              name: 'ssao'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '*='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'Surface'
+              field_name: 'c_spec'
+          right:
+            ExprIdentifier
+              name: 'ssao'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '+='
+          left:
+            ExprIdentifier
+              name: 'colorAccum'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'Diffuse_IBL'
+              args:
+                ExprIdentifier
+                  name: 'Surface'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '+='
+          left:
+            ExprIdentifier
+              name: 'colorAccum'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'Specular_IBL'
+              args:
+                ExprIdentifier
+                  name: 'Surface'
+    StmtReturn
+      value:
+        ExprConstructorCall
+          type:
+            BuiltinType
+              name: 'float4'
+          args:
+            ExprIdentifier
+              name: 'colorAccum'
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'baseColor'
+              field_name: 'a'

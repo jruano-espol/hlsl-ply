@@ -1,0 +1,587 @@
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'defaultSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 10
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerComparisonState'
+  name: 'shadowSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 11
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'cubeMapSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 12
+      space: 0
+  initializer: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'HashTriangleID'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 2
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Min3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Med3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Max3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '|'
+          left:
+            ExprBinary
+              op: '|'
+              left:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I2'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 16
+              right:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I1'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 8
+          right:
+            ExprBinary
+              op: '&'
+              left:
+                ExprIdentifier
+                  name: 'I0'
+              right:
+                ExprIntLit
+                  value: 4278190335
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'VSConstants'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 0
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'modelToProjection'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'modelToShadow'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'ViewerPos'
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'StartVertex'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 1
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'materialIdx'
+StmtStructDef
+  name: 'VSInput'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'position'
+      semantic_label: 'POSITION'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'texcoord0'
+      semantic_label: 'TEXCOORD'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: 'NORMAL'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'tangent'
+      semantic_label: 'TANGENT'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'bitangent'
+      semantic_label: 'BITANGENT'
+StmtStructDef
+  name: 'VSOutput'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'position'
+      semantic_label: 'SV_Position'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      semantic_label: 'WorldPos'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'texCoord'
+      semantic_label: 'TexCoord0'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: 'TexCoord1'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'shadowCoord'
+      semantic_label: 'TexCoord2'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: 'Normal'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'tangent'
+      semantic_label: 'Tangent'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'bitangent'
+      semantic_label: 'Bitangent'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: 'TexCoord3'
+StmtFuncDef
+  return_type:
+    UserDefinedType
+      name: 'VSOutput'
+  name: 'main'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'VSInput'
+      name: 'vsInput'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: 'SV_VertexID'
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'VSOutput'
+      name: 'vsOutput'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'position'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'mul'
+              args:
+                ExprIdentifier
+                  name: 'modelToProjection'
+                ExprConstructorCall
+                  type:
+                    BuiltinType
+                      name: 'float4'
+                  args:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'vsInput'
+                      field_name: 'position'
+                    ExprFloatLit
+                      value: 1.0
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'worldPos'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'position'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'texCoord'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'texcoord0'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'viewDir'
+          right:
+            ExprBinary
+              op: '-'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsInput'
+                  field_name: 'position'
+              right:
+                ExprIdentifier
+                  name: 'ViewerPos'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'shadowCoord'
+          right:
+            ExprFieldAccess
+              left:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'mul'
+                  args:
+                    ExprIdentifier
+                      name: 'modelToShadow'
+                    ExprConstructorCall
+                      type:
+                        BuiltinType
+                          name: 'float4'
+                      args:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'vsInput'
+                          field_name: 'position'
+                        ExprFloatLit
+                          value: 1.0
+              field_name: 'xyz'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'normal'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'normal'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'tangent'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'tangent'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'bitangent'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'bitangent'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'vertexID'
+          right:
+            ExprBinary
+              op: '|'
+              left:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprIdentifier
+                      name: 'materialIdx'
+                  right:
+                    ExprIntLit
+                      value: 24
+              right:
+                ExprBinary
+                  op: '&'
+                  left:
+                    ExprIdentifier
+                      name: 'vertexID'
+                  right:
+                    ExprIntLit
+                      value: 65535
+    StmtReturn
+      value:
+        ExprIdentifier
+          name: 'vsOutput'

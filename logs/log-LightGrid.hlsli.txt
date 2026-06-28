@@ -1,0 +1,187 @@
+StmtVarDef
+  flags: 2
+  type:
+    BuiltinType
+      name: 'int'
+  name: 'MAX_LIGHTS'
+  array_size: None
+  binding: None
+  initializer:
+    ExprIntLit
+      value: 128
+StmtVarDef
+  flags: 2
+  type:
+    BuiltinType
+      name: 'int'
+  name: 'TILE_SIZE'
+  array_size: None
+  binding: None
+  initializer:
+    ExprBinary
+      op: '+'
+      left:
+        ExprIntLit
+          value: 4
+      right:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'MAX_LIGHTS'
+          right:
+            ExprIntLit
+              value: 4
+StmtStructDef
+  name: 'LightData'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'pos'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'radiusSq'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'color'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'type'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'coneDir'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'coneAngles'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'shadowTextureMatrix'
+      semantic_label: None
+StmtFuncDef
+  return_type:
+    UserDefinedType
+      name: 'uint2'
+  name: 'GetTilePos'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'pos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'invTileDim'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'pos'
+          right:
+            ExprIdentifier
+              name: 'invTileDim'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'GetTileIndex'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'uint2'
+      name: 'tilePos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileCountX'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '+'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'tilePos'
+                  field_name: 'y'
+              right:
+                ExprIdentifier
+                  name: 'tileCountX'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'tilePos'
+              field_name: 'x'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'GetTileOffset'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileIndex'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'tileIndex'
+          right:
+            ExprIdentifier
+              name: 'TILE_SIZE'

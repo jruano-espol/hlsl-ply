@@ -1,7 +1,8 @@
 import sys
+import os
 from preprocessor import Preprocessor
 from lexer import make_lexer, had_lexer_error
-from parser import parser, had_parser_error
+from parser import parser, had_parser_error, str_from_ast
 
 def main():
     if len(sys.argv) != 2:
@@ -18,6 +19,11 @@ def main():
     if had_parser_error():
         pretty_print_preprocessed(source_code)
         exit(1)
+
+    log_path = f'logs/log-{os.path.basename(file_path)}.txt'
+    with open(log_path, 'w') as f:
+        print(str_from_ast(ast), file=f)
+
     print("\nSUCCESS: The code has no errors.")
 
 def pretty_print_preprocessed(source_code: str):

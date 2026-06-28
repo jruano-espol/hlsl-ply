@@ -1,0 +1,214 @@
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'defaultSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 10
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerComparisonState'
+  name: 'shadowSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 11
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'cubeMapSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 12
+      space: 0
+  initializer: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'HashTriangleID'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 2
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Min3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Med3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Max3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '|'
+          left:
+            ExprBinary
+              op: '|'
+              left:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I2'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 16
+              right:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I1'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 8
+          right:
+            ExprBinary
+              op: '&'
+              left:
+                ExprIdentifier
+                  name: 'I0'
+              right:
+                ExprIntLit
+                  value: 4278190335

@@ -1,0 +1,609 @@
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'defaultSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 10
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerComparisonState'
+  name: 'shadowSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 11
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'cubeMapSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 12
+      space: 0
+  initializer: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'HashTriangleID'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 2
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Min3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Med3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Max3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '|'
+          left:
+            ExprBinary
+              op: '|'
+              left:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I2'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 16
+              right:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I1'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 8
+          right:
+            ExprBinary
+              op: '&'
+              left:
+                ExprIdentifier
+                  name: 'I0'
+              right:
+                ExprIntLit
+                  value: 4278190335
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'MeshConstants'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 0
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'WorldMatrix'
+    BufferField
+      type:
+        UserDefinedType
+          name: 'float3x3'
+      name: 'WorldIT'
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'GlobalConstants'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 1
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'ViewProjMatrix'
+StmtStructDef
+  name: 'Joint'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'PosMatrix'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        UserDefinedType
+          name: 'float4x3'
+      name: 'NrmMatrix'
+      semantic_label: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'StructuredBuffer'
+      subtype:
+        UserDefinedType
+          name: 'Joint'
+  name: 'Joints'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 20
+      space: 0
+  initializer: None
+StmtStructDef
+  name: 'VSInput'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'position'
+      semantic_label: 'POSITION'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'uv0'
+      semantic_label: 'TEXCOORD0'
+    StructField
+      interpolation_modifier: None
+      type:
+        UserDefinedType
+          name: 'uint4'
+      name: 'jointIndices'
+      semantic_label: 'BLENDINDICES'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'jointWeights'
+      semantic_label: 'BLENDWEIGHT'
+StmtStructDef
+  name: 'VSOutput'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'position'
+      semantic_label: 'SV_POSITION'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'uv0'
+      semantic_label: 'TEXCOORD0'
+StmtFuncDef
+  return_type:
+    UserDefinedType
+      name: 'VSOutput'
+  name: 'main'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'VSInput'
+      name: 'vsInput'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'VSOutput'
+      name: 'vsOutput'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'position'
+      array_size: None
+      binding: None
+      initializer:
+        ExprConstructorCall
+          type:
+            BuiltinType
+              name: 'float4'
+          args:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'position'
+            ExprFloatLit
+              value: 1.0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'weights'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '/'
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'jointWeights'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'dot'
+              args:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsInput'
+                  field_name: 'jointWeights'
+                ExprIntLit
+                  value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'skinPosMat'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '+'
+          left:
+            ExprBinary
+              op: '+'
+              left:
+                ExprBinary
+                  op: '+'
+                  left:
+                    ExprBinary
+                      op: '*'
+                      left:
+                        ExprFieldAccess
+                          left:
+                            ExprArraySubscript
+                              left:
+                                ExprIdentifier
+                                  name: 'Joints'
+                              right:
+                                ExprFieldAccess
+                                  left:
+                                    ExprFieldAccess
+                                      left:
+                                        ExprIdentifier
+                                          name: 'vsInput'
+                                      field_name: 'jointIndices'
+                                  field_name: 'x'
+                          field_name: 'PosMatrix'
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'weights'
+                          field_name: 'x'
+                  right:
+                    ExprBinary
+                      op: '*'
+                      left:
+                        ExprFieldAccess
+                          left:
+                            ExprArraySubscript
+                              left:
+                                ExprIdentifier
+                                  name: 'Joints'
+                              right:
+                                ExprFieldAccess
+                                  left:
+                                    ExprFieldAccess
+                                      left:
+                                        ExprIdentifier
+                                          name: 'vsInput'
+                                      field_name: 'jointIndices'
+                                  field_name: 'y'
+                          field_name: 'PosMatrix'
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'weights'
+                          field_name: 'y'
+              right:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprFieldAccess
+                      left:
+                        ExprArraySubscript
+                          left:
+                            ExprIdentifier
+                              name: 'Joints'
+                          right:
+                            ExprFieldAccess
+                              left:
+                                ExprFieldAccess
+                                  left:
+                                    ExprIdentifier
+                                      name: 'vsInput'
+                                  field_name: 'jointIndices'
+                              field_name: 'z'
+                      field_name: 'PosMatrix'
+                  right:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'weights'
+                      field_name: 'z'
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprArraySubscript
+                      left:
+                        ExprIdentifier
+                          name: 'Joints'
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'vsInput'
+                              field_name: 'jointIndices'
+                          field_name: 'w'
+                  field_name: 'PosMatrix'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'weights'
+                  field_name: 'w'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'position'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'mul'
+              args:
+                ExprIdentifier
+                  name: 'skinPosMat'
+                ExprIdentifier
+                  name: 'position'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFieldAccess
+          left:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'mul'
+              args:
+                ExprIdentifier
+                  name: 'WorldMatrix'
+                ExprIdentifier
+                  name: 'position'
+          field_name: 'xyz'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'position'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'mul'
+              args:
+                ExprIdentifier
+                  name: 'ViewProjMatrix'
+                ExprConstructorCall
+                  type:
+                    BuiltinType
+                      name: 'float4'
+                  args:
+                    ExprIdentifier
+                      name: 'worldPos'
+                    ExprFloatLit
+                      value: 1.0
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'uv0'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsInput'
+              field_name: 'uv0'
+    StmtReturn
+      value:
+        ExprIdentifier
+          name: 'vsOutput'

@@ -1,0 +1,3711 @@
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'defaultSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 10
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerComparisonState'
+  name: 'shadowSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 11
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'cubeMapSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 12
+      space: 0
+  initializer: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'HashTriangleID'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 2
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Min3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Med3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Max3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '|'
+          left:
+            ExprBinary
+              op: '|'
+              left:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I2'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 16
+              right:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I1'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 8
+          right:
+            ExprBinary
+              op: '&'
+              left:
+                ExprIdentifier
+                  name: 'I0'
+              right:
+                ExprIntLit
+                  value: 4278190335
+StmtVarDef
+  flags: 2
+  type:
+    BuiltinType
+      name: 'int'
+  name: 'MAX_LIGHTS'
+  array_size: None
+  binding: None
+  initializer:
+    ExprIntLit
+      value: 128
+StmtVarDef
+  flags: 2
+  type:
+    BuiltinType
+      name: 'int'
+  name: 'TILE_SIZE'
+  array_size: None
+  binding: None
+  initializer:
+    ExprBinary
+      op: '+'
+      left:
+        ExprIntLit
+          value: 4
+      right:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'MAX_LIGHTS'
+          right:
+            ExprIntLit
+              value: 4
+StmtStructDef
+  name: 'LightData'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'pos'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'radiusSq'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'color'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'type'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'coneDir'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'coneAngles'
+      semantic_label: None
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'shadowTextureMatrix'
+      semantic_label: None
+StmtFuncDef
+  return_type:
+    UserDefinedType
+      name: 'uint2'
+  name: 'GetTilePos'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'pos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'invTileDim'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'pos'
+          right:
+            ExprIdentifier
+              name: 'invTileDim'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'GetTileIndex'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'uint2'
+      name: 'tilePos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileCountX'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '+'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'tilePos'
+                  field_name: 'y'
+              right:
+                ExprIdentifier
+                  name: 'tileCountX'
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'tilePos'
+              field_name: 'x'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'GetTileOffset'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileIndex'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'tileIndex'
+          right:
+            ExprIdentifier
+              name: 'TILE_SIZE'
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'PSConstants'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 0
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'SunDirection'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'SunColor'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'AmbientColor'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'ShadowTexelSize'
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'InvTileDim'
+    BufferField
+      type:
+        UserDefinedType
+          name: 'uint4'
+      name: 'TileCount'
+    BufferField
+      type:
+        UserDefinedType
+          name: 'uint4'
+      name: 'FirstLightIndex'
+    BufferField
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'FrameIndexMod2'
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'StructuredBuffer'
+      subtype:
+        UserDefinedType
+          name: 'LightData'
+  name: 'lightBuffer'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 14
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2DArray'
+      subtype:
+        BuiltinType
+          name: 'float'
+  name: 'lightShadowArrayTex'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 15
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'ByteAddressBuffer'
+  name: 'lightGrid'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 16
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'ByteAddressBuffer'
+  name: 'lightGridBitMask'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 17
+      space: 0
+  initializer: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'void'
+  name: 'AntiAliasSpecular'
+  args:
+    FuncParam
+      input_modifier: 'inout'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'texNormal'
+      semantic_label: None
+    FuncParam
+      input_modifier: 'inout'
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'normalLenSq'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'dot'
+          args:
+            ExprIdentifier
+              name: 'texNormal'
+            ExprIdentifier
+              name: 'texNormal'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'invNormalLen'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'rsqrt'
+          args:
+            ExprIdentifier
+              name: 'normalLenSq'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '*='
+          left:
+            ExprIdentifier
+              name: 'texNormal'
+          right:
+            ExprIdentifier
+              name: 'invNormalLen'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'normalLen'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'normalLenSq'
+          right:
+            ExprIdentifier
+              name: 'invNormalLen'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'flatness'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'saturate'
+          args:
+            ExprBinary
+              op: '-'
+              left:
+                ExprBinary
+                  op: '-'
+                  left:
+                    ExprIntLit
+                      value: 1
+                  right:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'abs'
+                      args:
+                        ExprFunctionCall
+                          left:
+                            ExprIdentifier
+                              name: 'ddx'
+                          args:
+                            ExprIdentifier
+                              name: 'normalLen'
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'abs'
+                  args:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'ddy'
+                      args:
+                        ExprIdentifier
+                          name: 'normalLen'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'gloss'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'exp2'
+              args:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'lerp'
+                  args:
+                    ExprIntLit
+                      value: 0
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'log2'
+                      args:
+                        ExprIdentifier
+                          name: 'gloss'
+                    ExprIdentifier
+                      name: 'flatness'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'void'
+  name: 'FSchlick'
+  args:
+    FuncParam
+      input_modifier: 'inout'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specular'
+      semantic_label: None
+    FuncParam
+      input_modifier: 'inout'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuse'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'halfVec'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'fresnel'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'pow'
+          args:
+            ExprBinary
+              op: '-'
+              left:
+                ExprFloatLit
+                  value: 1.0
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'saturate'
+                  args:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'dot'
+                      args:
+                        ExprIdentifier
+                          name: 'lightDir'
+                        ExprIdentifier
+                          name: 'halfVec'
+            ExprFloatLit
+              value: 5.0
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'specular'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'lerp'
+              args:
+                ExprIdentifier
+                  name: 'specular'
+                ExprIntLit
+                  value: 1
+                ExprIdentifier
+                  name: 'fresnel'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'diffuse'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'lerp'
+              args:
+                ExprIdentifier
+                  name: 'diffuse'
+                ExprIntLit
+                  value: 0
+                ExprIdentifier
+                  name: 'fresnel'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ApplyAmbientLight'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuse'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'ao'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightColor'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'ao'
+              right:
+                ExprIdentifier
+                  name: 'diffuse'
+          right:
+            ExprIdentifier
+              name: 'lightColor'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float'
+  name: 'GetDirectionalShadow'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'ShadowCoord'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        TemplatedType
+          name: 'Texture2D'
+          subtype:
+            BuiltinType
+              name: 'float'
+      name: 'texShadow'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: 2
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'Dilation'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFloatLit
+          value: 2.0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'd1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'Dilation'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'ShadowTexelSize'
+                  field_name: 'x'
+          right:
+            ExprFloatLit
+              value: 0.125
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'd2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'Dilation'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'ShadowTexelSize'
+                  field_name: 'x'
+          right:
+            ExprFloatLit
+              value: 0.875
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'd3'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'Dilation'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'ShadowTexelSize'
+                  field_name: 'x'
+          right:
+            ExprFloatLit
+              value: 0.625
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'd4'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'Dilation'
+              right:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'ShadowTexelSize'
+                  field_name: 'x'
+          right:
+            ExprFloatLit
+              value: 0.375
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'result'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '/'
+          left:
+            ExprBinary
+              op: '+'
+              left:
+                ExprBinary
+                  op: '+'
+                  left:
+                    ExprBinary
+                      op: '+'
+                      left:
+                        ExprBinary
+                          op: '+'
+                          left:
+                            ExprBinary
+                              op: '+'
+                              left:
+                                ExprBinary
+                                  op: '+'
+                                  left:
+                                    ExprBinary
+                                      op: '+'
+                                      left:
+                                        ExprBinary
+                                          op: '+'
+                                          left:
+                                            ExprBinary
+                                              op: '*'
+                                              left:
+                                                ExprFloatLit
+                                                  value: 2.0
+                                              right:
+                                                ExprFunctionCall
+                                                  left:
+                                                    ExprFieldAccess
+                                                      left:
+                                                        ExprIdentifier
+                                                          name: 'texShadow'
+                                                      field_name: 'SampleCmpLevelZero'
+                                                  args:
+                                                    ExprIdentifier
+                                                      name: 'shadowSampler'
+                                                    ExprFieldAccess
+                                                      left:
+                                                        ExprIdentifier
+                                                          name: 'ShadowCoord'
+                                                      field_name: 'xy'
+                                                    ExprFieldAccess
+                                                      left:
+                                                        ExprIdentifier
+                                                          name: 'ShadowCoord'
+                                                      field_name: 'z'
+                                          right:
+                                            ExprFunctionCall
+                                              left:
+                                                ExprFieldAccess
+                                                  left:
+                                                    ExprIdentifier
+                                                      name: 'texShadow'
+                                                  field_name: 'SampleCmpLevelZero'
+                                              args:
+                                                ExprIdentifier
+                                                  name: 'shadowSampler'
+                                                ExprBinary
+                                                  op: '+'
+                                                  left:
+                                                    ExprFieldAccess
+                                                      left:
+                                                        ExprIdentifier
+                                                          name: 'ShadowCoord'
+                                                      field_name: 'xy'
+                                                  right:
+                                                    ExprConstructorCall
+                                                      type:
+                                                        BuiltinType
+                                                          name: 'float2'
+                                                      args:
+                                                        ExprUnary
+                                                          op: '-'
+                                                          right:
+                                                            ExprIdentifier
+                                                              name: 'd2'
+                                                        ExprIdentifier
+                                                          name: 'd1'
+                                                ExprFieldAccess
+                                                  left:
+                                                    ExprIdentifier
+                                                      name: 'ShadowCoord'
+                                                  field_name: 'z'
+                                      right:
+                                        ExprFunctionCall
+                                          left:
+                                            ExprFieldAccess
+                                              left:
+                                                ExprIdentifier
+                                                  name: 'texShadow'
+                                              field_name: 'SampleCmpLevelZero'
+                                          args:
+                                            ExprIdentifier
+                                              name: 'shadowSampler'
+                                            ExprBinary
+                                              op: '+'
+                                              left:
+                                                ExprFieldAccess
+                                                  left:
+                                                    ExprIdentifier
+                                                      name: 'ShadowCoord'
+                                                  field_name: 'xy'
+                                              right:
+                                                ExprConstructorCall
+                                                  type:
+                                                    BuiltinType
+                                                      name: 'float2'
+                                                  args:
+                                                    ExprUnary
+                                                      op: '-'
+                                                      right:
+                                                        ExprIdentifier
+                                                          name: 'd1'
+                                                    ExprUnary
+                                                      op: '-'
+                                                      right:
+                                                        ExprIdentifier
+                                                          name: 'd2'
+                                            ExprFieldAccess
+                                              left:
+                                                ExprIdentifier
+                                                  name: 'ShadowCoord'
+                                              field_name: 'z'
+                                  right:
+                                    ExprFunctionCall
+                                      left:
+                                        ExprFieldAccess
+                                          left:
+                                            ExprIdentifier
+                                              name: 'texShadow'
+                                          field_name: 'SampleCmpLevelZero'
+                                      args:
+                                        ExprIdentifier
+                                          name: 'shadowSampler'
+                                        ExprBinary
+                                          op: '+'
+                                          left:
+                                            ExprFieldAccess
+                                              left:
+                                                ExprIdentifier
+                                                  name: 'ShadowCoord'
+                                              field_name: 'xy'
+                                          right:
+                                            ExprConstructorCall
+                                              type:
+                                                BuiltinType
+                                                  name: 'float2'
+                                              args:
+                                                ExprIdentifier
+                                                  name: 'd2'
+                                                ExprUnary
+                                                  op: '-'
+                                                  right:
+                                                    ExprIdentifier
+                                                      name: 'd1'
+                                        ExprFieldAccess
+                                          left:
+                                            ExprIdentifier
+                                              name: 'ShadowCoord'
+                                          field_name: 'z'
+                              right:
+                                ExprFunctionCall
+                                  left:
+                                    ExprFieldAccess
+                                      left:
+                                        ExprIdentifier
+                                          name: 'texShadow'
+                                      field_name: 'SampleCmpLevelZero'
+                                  args:
+                                    ExprIdentifier
+                                      name: 'shadowSampler'
+                                    ExprBinary
+                                      op: '+'
+                                      left:
+                                        ExprFieldAccess
+                                          left:
+                                            ExprIdentifier
+                                              name: 'ShadowCoord'
+                                          field_name: 'xy'
+                                      right:
+                                        ExprConstructorCall
+                                          type:
+                                            BuiltinType
+                                              name: 'float2'
+                                          args:
+                                            ExprIdentifier
+                                              name: 'd1'
+                                            ExprIdentifier
+                                              name: 'd2'
+                                    ExprFieldAccess
+                                      left:
+                                        ExprIdentifier
+                                          name: 'ShadowCoord'
+                                      field_name: 'z'
+                          right:
+                            ExprFunctionCall
+                              left:
+                                ExprFieldAccess
+                                  left:
+                                    ExprIdentifier
+                                      name: 'texShadow'
+                                  field_name: 'SampleCmpLevelZero'
+                              args:
+                                ExprIdentifier
+                                  name: 'shadowSampler'
+                                ExprBinary
+                                  op: '+'
+                                  left:
+                                    ExprFieldAccess
+                                      left:
+                                        ExprIdentifier
+                                          name: 'ShadowCoord'
+                                      field_name: 'xy'
+                                  right:
+                                    ExprConstructorCall
+                                      type:
+                                        BuiltinType
+                                          name: 'float2'
+                                      args:
+                                        ExprUnary
+                                          op: '-'
+                                          right:
+                                            ExprIdentifier
+                                              name: 'd4'
+                                        ExprIdentifier
+                                          name: 'd3'
+                                ExprFieldAccess
+                                  left:
+                                    ExprIdentifier
+                                      name: 'ShadowCoord'
+                                  field_name: 'z'
+                      right:
+                        ExprFunctionCall
+                          left:
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'texShadow'
+                              field_name: 'SampleCmpLevelZero'
+                          args:
+                            ExprIdentifier
+                              name: 'shadowSampler'
+                            ExprBinary
+                              op: '+'
+                              left:
+                                ExprFieldAccess
+                                  left:
+                                    ExprIdentifier
+                                      name: 'ShadowCoord'
+                                  field_name: 'xy'
+                              right:
+                                ExprConstructorCall
+                                  type:
+                                    BuiltinType
+                                      name: 'float2'
+                                  args:
+                                    ExprUnary
+                                      op: '-'
+                                      right:
+                                        ExprIdentifier
+                                          name: 'd3'
+                                    ExprUnary
+                                      op: '-'
+                                      right:
+                                        ExprIdentifier
+                                          name: 'd4'
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'ShadowCoord'
+                              field_name: 'z'
+                  right:
+                    ExprFunctionCall
+                      left:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'texShadow'
+                          field_name: 'SampleCmpLevelZero'
+                      args:
+                        ExprIdentifier
+                          name: 'shadowSampler'
+                        ExprBinary
+                          op: '+'
+                          left:
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'ShadowCoord'
+                              field_name: 'xy'
+                          right:
+                            ExprConstructorCall
+                              type:
+                                BuiltinType
+                                  name: 'float2'
+                              args:
+                                ExprIdentifier
+                                  name: 'd4'
+                                ExprUnary
+                                  op: '-'
+                                  right:
+                                    ExprIdentifier
+                                      name: 'd3'
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'ShadowCoord'
+                          field_name: 'z'
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'texShadow'
+                      field_name: 'SampleCmpLevelZero'
+                  args:
+                    ExprIdentifier
+                      name: 'shadowSampler'
+                    ExprBinary
+                      op: '+'
+                      left:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'ShadowCoord'
+                          field_name: 'xy'
+                      right:
+                        ExprConstructorCall
+                          type:
+                            BuiltinType
+                              name: 'float2'
+                          args:
+                            ExprIdentifier
+                              name: 'd3'
+                            ExprIdentifier
+                              name: 'd4'
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'ShadowCoord'
+                      field_name: 'z'
+          right:
+            ExprFloatLit
+              value: 10.0
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'result'
+          right:
+            ExprIdentifier
+              name: 'result'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float'
+  name: 'GetShadowConeLight'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'lightIndex'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'shadowCoord'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'result'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'lightShadowArrayTex'
+              field_name: 'SampleCmpLevelZero'
+          args:
+            ExprIdentifier
+              name: 'shadowSampler'
+            ExprConstructorCall
+              type:
+                BuiltinType
+                  name: 'float3'
+              args:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'shadowCoord'
+                  field_name: 'xy'
+                ExprIdentifier
+                  name: 'lightIndex'
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'shadowCoord'
+              field_name: 'z'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'result'
+          right:
+            ExprIdentifier
+              name: 'result'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ApplyLightCommon'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuseColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specularColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularMask'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightColor'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'halfVec'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'normalize'
+          args:
+            ExprBinary
+              op: '-'
+              left:
+                ExprIdentifier
+                  name: 'lightDir'
+              right:
+                ExprIdentifier
+                  name: 'viewDir'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'nDotH'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'saturate'
+          args:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'dot'
+              args:
+                ExprIdentifier
+                  name: 'halfVec'
+                ExprIdentifier
+                  name: 'normal'
+    StmtExpr
+      expr:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'FSchlick'
+          args:
+            ExprIdentifier
+              name: 'diffuseColor'
+            ExprIdentifier
+              name: 'specularColor'
+            ExprIdentifier
+              name: 'lightDir'
+            ExprIdentifier
+              name: 'halfVec'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularFactor'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '/'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprIdentifier
+                      name: 'specularMask'
+                  right:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'pow'
+                      args:
+                        ExprIdentifier
+                          name: 'nDotH'
+                        ExprIdentifier
+                          name: 'gloss'
+              right:
+                ExprBinary
+                  op: '+'
+                  left:
+                    ExprIdentifier
+                      name: 'gloss'
+                  right:
+                    ExprIntLit
+                      value: 2
+          right:
+            ExprIntLit
+              value: 8
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'nDotL'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'saturate'
+          args:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'dot'
+              args:
+                ExprIdentifier
+                  name: 'normal'
+                ExprIdentifier
+                  name: 'lightDir'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'nDotL'
+              right:
+                ExprIdentifier
+                  name: 'lightColor'
+          right:
+            ExprBinary
+              op: '+'
+              left:
+                ExprIdentifier
+                  name: 'diffuseColor'
+              right:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprIdentifier
+                      name: 'specularFactor'
+                  right:
+                    ExprIdentifier
+                      name: 'specularColor'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ApplyDirectionalLight'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuseColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specularColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularMask'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'shadowCoord'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        TemplatedType
+          name: 'Texture2D'
+          subtype:
+            BuiltinType
+              name: 'float'
+      name: 'ShadowMap'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'shadow'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'GetDirectionalShadow'
+          args:
+            ExprIdentifier
+              name: 'shadowCoord'
+            ExprIdentifier
+              name: 'ShadowMap'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'shadow'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'ApplyLightCommon'
+              args:
+                ExprIdentifier
+                  name: 'diffuseColor'
+                ExprIdentifier
+                  name: 'specularColor'
+                ExprIdentifier
+                  name: 'specularMask'
+                ExprIdentifier
+                  name: 'gloss'
+                ExprIdentifier
+                  name: 'normal'
+                ExprIdentifier
+                  name: 'viewDir'
+                ExprIdentifier
+                  name: 'lightDir'
+                ExprIdentifier
+                  name: 'lightColor'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ApplyPointLight'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuseColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specularColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularMask'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightPos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'lightRadiusSq'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightColor'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightDir'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '-'
+          left:
+            ExprIdentifier
+              name: 'lightPos'
+          right:
+            ExprIdentifier
+              name: 'worldPos'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'lightDistSq'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'dot'
+          args:
+            ExprIdentifier
+              name: 'lightDir'
+            ExprIdentifier
+              name: 'lightDir'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'invLightDist'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'rsqrt'
+          args:
+            ExprIdentifier
+              name: 'lightDistSq'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '*='
+          left:
+            ExprIdentifier
+              name: 'lightDir'
+          right:
+            ExprIdentifier
+              name: 'invLightDist'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'distanceFalloff'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'lightRadiusSq'
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'invLightDist'
+              right:
+                ExprIdentifier
+                  name: 'invLightDist'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'distanceFalloff'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'max'
+              args:
+                ExprIntLit
+                  value: 0
+                ExprBinary
+                  op: '-'
+                  left:
+                    ExprIdentifier
+                      name: 'distanceFalloff'
+                  right:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'rsqrt'
+                      args:
+                        ExprIdentifier
+                          name: 'distanceFalloff'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'distanceFalloff'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'ApplyLightCommon'
+              args:
+                ExprIdentifier
+                  name: 'diffuseColor'
+                ExprIdentifier
+                  name: 'specularColor'
+                ExprIdentifier
+                  name: 'specularMask'
+                ExprIdentifier
+                  name: 'gloss'
+                ExprIdentifier
+                  name: 'normal'
+                ExprIdentifier
+                  name: 'viewDir'
+                ExprIdentifier
+                  name: 'lightDir'
+                ExprIdentifier
+                  name: 'lightColor'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ApplyConeLight'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuseColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specularColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularMask'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightPos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'lightRadiusSq'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'coneDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'coneAngles'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightDir'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '-'
+          left:
+            ExprIdentifier
+              name: 'lightPos'
+          right:
+            ExprIdentifier
+              name: 'worldPos'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'lightDistSq'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'dot'
+          args:
+            ExprIdentifier
+              name: 'lightDir'
+            ExprIdentifier
+              name: 'lightDir'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'invLightDist'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'rsqrt'
+          args:
+            ExprIdentifier
+              name: 'lightDistSq'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '*='
+          left:
+            ExprIdentifier
+              name: 'lightDir'
+          right:
+            ExprIdentifier
+              name: 'invLightDist'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'distanceFalloff'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'lightRadiusSq'
+          right:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'invLightDist'
+              right:
+                ExprIdentifier
+                  name: 'invLightDist'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'distanceFalloff'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'max'
+              args:
+                ExprIntLit
+                  value: 0
+                ExprBinary
+                  op: '-'
+                  left:
+                    ExprIdentifier
+                      name: 'distanceFalloff'
+                  right:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'rsqrt'
+                      args:
+                        ExprIdentifier
+                          name: 'distanceFalloff'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'coneFalloff'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'dot'
+          args:
+            ExprUnary
+              op: '-'
+              right:
+                ExprIdentifier
+                  name: 'lightDir'
+            ExprIdentifier
+              name: 'coneDir'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'coneFalloff'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'saturate'
+              args:
+                ExprBinary
+                  op: '*'
+                  left:
+                    ExprBinary
+                      op: '-'
+                      left:
+                        ExprIdentifier
+                          name: 'coneFalloff'
+                      right:
+                        ExprFieldAccess
+                          left:
+                            ExprIdentifier
+                              name: 'coneAngles'
+                          field_name: 'y'
+                  right:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'coneAngles'
+                      field_name: 'x'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'coneFalloff'
+              right:
+                ExprIdentifier
+                  name: 'distanceFalloff'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'ApplyLightCommon'
+              args:
+                ExprIdentifier
+                  name: 'diffuseColor'
+                ExprIdentifier
+                  name: 'specularColor'
+                ExprIdentifier
+                  name: 'specularMask'
+                ExprIdentifier
+                  name: 'gloss'
+                ExprIdentifier
+                  name: 'normal'
+                ExprIdentifier
+                  name: 'viewDir'
+                ExprIdentifier
+                  name: 'lightDir'
+                ExprIdentifier
+                  name: 'lightColor'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'float3'
+  name: 'ApplyConeShadowedLight'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuseColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specularColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularMask'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightPos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'lightRadiusSq'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'lightColor'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'coneDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'coneAngles'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'shadowTextureMatrix'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'lightIndex'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'shadowCoord'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'mul'
+          args:
+            ExprIdentifier
+              name: 'shadowTextureMatrix'
+            ExprConstructorCall
+              type:
+                BuiltinType
+                  name: 'float4'
+              args:
+                ExprIdentifier
+                  name: 'worldPos'
+                ExprFloatLit
+                  value: 1.0
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '*='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'shadowCoord'
+              field_name: 'xyz'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'rcp'
+              args:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'shadowCoord'
+                  field_name: 'w'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'shadow'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'GetShadowConeLight'
+          args:
+            ExprIdentifier
+              name: 'lightIndex'
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'shadowCoord'
+              field_name: 'xyz'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '*'
+          left:
+            ExprIdentifier
+              name: 'shadow'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'ApplyConeLight'
+              args:
+                ExprIdentifier
+                  name: 'diffuseColor'
+                ExprIdentifier
+                  name: 'specularColor'
+                ExprIdentifier
+                  name: 'specularMask'
+                ExprIdentifier
+                  name: 'gloss'
+                ExprIdentifier
+                  name: 'normal'
+                ExprIdentifier
+                  name: 'viewDir'
+                ExprIdentifier
+                  name: 'worldPos'
+                ExprIdentifier
+                  name: 'lightPos'
+                ExprIdentifier
+                  name: 'lightRadiusSq'
+                ExprIdentifier
+                  name: 'lightColor'
+                ExprIdentifier
+                  name: 'coneDir'
+                ExprIdentifier
+                  name: 'coneAngles'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'PullNextBit'
+  args:
+    FuncParam
+      input_modifier: 'inout'
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'bits'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'bitIndex'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'firstbitlow'
+          args:
+            ExprIdentifier
+              name: 'bits'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '^='
+          left:
+            ExprIdentifier
+              name: 'bits'
+          right:
+            ExprBinary
+              op: '<<'
+              left:
+                ExprIntLit
+                  value: 1
+              right:
+                ExprIdentifier
+                  name: 'bitIndex'
+    StmtReturn
+      value:
+        ExprIdentifier
+          name: 'bitIndex'
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'void'
+  name: 'ShadeLights'
+  args:
+    FuncParam
+      input_modifier: 'inout'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'colorSum'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'uint2'
+      name: 'pixelPos'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuseAlbedo'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specularAlbedo'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularMask'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: None
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'uint2'
+      name: 'tilePos'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'GetTilePos'
+          args:
+            ExprIdentifier
+              name: 'pixelPos'
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'InvTileDim'
+              field_name: 'xy'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileIndex'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'GetTileIndex'
+          args:
+            ExprIdentifier
+              name: 'tilePos'
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'TileCount'
+              field_name: 'x'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileOffset'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'GetTileOffset'
+          args:
+            ExprIdentifier
+              name: 'tileIndex'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'lightBitMaskGroups'
+      array_size: 4
+      binding: None
+      initializer:
+        ExprArrayLit
+          elements:
+            ExprIntLit
+              value: 0
+            ExprIntLit
+              value: 0
+            ExprIntLit
+              value: 0
+            ExprIntLit
+              value: 0
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'uint4'
+      name: 'lightBitMask'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'lightGridBitMask'
+              field_name: 'Load4'
+          args:
+            ExprBinary
+              op: '*'
+              left:
+                ExprIdentifier
+                  name: 'tileIndex'
+              right:
+                ExprIntLit
+                  value: 16
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'lightBitMaskGroups'
+              right:
+                ExprIntLit
+                  value: 0
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'lightBitMask'
+              field_name: 'x'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'lightBitMaskGroups'
+              right:
+                ExprIntLit
+                  value: 1
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'lightBitMask'
+              field_name: 'y'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'lightBitMaskGroups'
+              right:
+                ExprIntLit
+                  value: 2
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'lightBitMask'
+              field_name: 'z'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'lightBitMaskGroups'
+              right:
+                ExprIntLit
+                  value: 3
+          right:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'lightBitMask'
+              field_name: 'w'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileLightCount'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'lightGrid'
+              field_name: 'Load'
+          args:
+            ExprBinary
+              op: '+'
+              left:
+                ExprIdentifier
+                  name: 'tileOffset'
+              right:
+                ExprIntLit
+                  value: 0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileLightCountSphere'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '&'
+          left:
+            ExprBinary
+              op: '>>'
+              left:
+                ExprIdentifier
+                  name: 'tileLightCount'
+              right:
+                ExprIntLit
+                  value: 0
+          right:
+            ExprIntLit
+              value: 255
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileLightCountCone'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '&'
+          left:
+            ExprBinary
+              op: '>>'
+              left:
+                ExprIdentifier
+                  name: 'tileLightCount'
+              right:
+                ExprIntLit
+                  value: 8
+          right:
+            ExprIntLit
+              value: 255
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileLightCountConeShadowed'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '&'
+          left:
+            ExprBinary
+              op: '>>'
+              left:
+                ExprIdentifier
+                  name: 'tileLightCount'
+              right:
+                ExprIntLit
+                  value: 16
+          right:
+            ExprIntLit
+              value: 255
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'tileLightLoadOffset'
+      array_size: None
+      binding: None
+      initializer:
+        ExprBinary
+          op: '+'
+          left:
+            ExprIdentifier
+              name: 'tileOffset'
+          right:
+            ExprIntLit
+              value: 4
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'n'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtFor
+      pre:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'n'
+          right:
+            ExprIntLit
+              value: 0
+      condition:
+        ExprBinary
+          op: '<'
+          left:
+            ExprIdentifier
+              name: 'n'
+          right:
+            ExprIdentifier
+              name: 'tileLightCountSphere'
+      post_expr:
+        ExprUnaryPostfix
+          op: '++'
+          right:
+            ExprIdentifier
+              name: 'n'
+      statements:
+        StmtVarDef
+          flags: None
+          type:
+            BuiltinType
+              name: 'uint'
+          name: 'lightIndex'
+          array_size: None
+          binding: None
+          initializer:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'lightGrid'
+                  field_name: 'Load'
+              args:
+                ExprIdentifier
+                  name: 'tileLightLoadOffset'
+        StmtVarDef
+          flags: None
+          type:
+            UserDefinedType
+              name: 'LightData'
+          name: 'lightData'
+          array_size: None
+          binding: None
+          initializer:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'lightBuffer'
+              right:
+                ExprIdentifier
+                  name: 'lightIndex'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '+='
+              left:
+                ExprIdentifier
+                  name: 'colorSum'
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'ApplyPointLight'
+                  args:
+                    ExprIdentifier
+                      name: 'POINT_LIGHT_ARGS'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '+='
+              left:
+                ExprIdentifier
+                  name: 'tileLightLoadOffset'
+              right:
+                ExprIntLit
+                  value: 4
+    StmtFor
+      pre:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'n'
+          right:
+            ExprIntLit
+              value: 0
+      condition:
+        ExprBinary
+          op: '<'
+          left:
+            ExprIdentifier
+              name: 'n'
+          right:
+            ExprIdentifier
+              name: 'tileLightCountCone'
+      post_expr:
+        ExprUnaryPostfix
+          op: '++'
+          right:
+            ExprIdentifier
+              name: 'n'
+      statements:
+        StmtVarDef
+          flags: None
+          type:
+            BuiltinType
+              name: 'uint'
+          name: 'lightIndex'
+          array_size: None
+          binding: None
+          initializer:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'lightGrid'
+                  field_name: 'Load'
+              args:
+                ExprIdentifier
+                  name: 'tileLightLoadOffset'
+        StmtVarDef
+          flags: None
+          type:
+            UserDefinedType
+              name: 'LightData'
+          name: 'lightData'
+          array_size: None
+          binding: None
+          initializer:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'lightBuffer'
+              right:
+                ExprIdentifier
+                  name: 'lightIndex'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '+='
+              left:
+                ExprIdentifier
+                  name: 'colorSum'
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'ApplyConeLight'
+                  args:
+                    ExprIdentifier
+                      name: 'CONE_LIGHT_ARGS'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '+='
+              left:
+                ExprIdentifier
+                  name: 'tileLightLoadOffset'
+              right:
+                ExprIntLit
+                  value: 4
+    StmtFor
+      pre:
+        ExprAssignment
+          op: '='
+          left:
+            ExprIdentifier
+              name: 'n'
+          right:
+            ExprIntLit
+              value: 0
+      condition:
+        ExprBinary
+          op: '<'
+          left:
+            ExprIdentifier
+              name: 'n'
+          right:
+            ExprIdentifier
+              name: 'tileLightCountConeShadowed'
+      post_expr:
+        ExprUnaryPostfix
+          op: '++'
+          right:
+            ExprIdentifier
+              name: 'n'
+      statements:
+        StmtVarDef
+          flags: None
+          type:
+            BuiltinType
+              name: 'uint'
+          name: 'lightIndex'
+          array_size: None
+          binding: None
+          initializer:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'lightGrid'
+                  field_name: 'Load'
+              args:
+                ExprIdentifier
+                  name: 'tileLightLoadOffset'
+        StmtVarDef
+          flags: None
+          type:
+            UserDefinedType
+              name: 'LightData'
+          name: 'lightData'
+          array_size: None
+          binding: None
+          initializer:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'lightBuffer'
+              right:
+                ExprIdentifier
+                  name: 'lightIndex'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '+='
+              left:
+                ExprIdentifier
+                  name: 'colorSum'
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'ApplyConeShadowedLight'
+                  args:
+                    ExprIdentifier
+                      name: 'SHADOWED_LIGHT_ARGS'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '+='
+              left:
+                ExprIdentifier
+                  name: 'tileLightLoadOffset'
+              right:
+                ExprIntLit
+                  value: 4
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'texDiffuse'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 0
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'texSpecular'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 1
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float3'
+  name: 'texNormal'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 3
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float'
+  name: 'texSSAO'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 12
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    TemplatedType
+      name: 'Texture2D'
+      subtype:
+        BuiltinType
+          name: 'float'
+  name: 'texShadow'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 't'
+      number: 13
+      space: 0
+  initializer: None
+StmtStructDef
+  name: 'VSOutput'
+  fields:
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'position'
+      semantic_label: 'SV_Position'
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'worldPos'
+      semantic_label: 'WorldPos'
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'uv'
+      semantic_label: 'TexCoord0'
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: 'TexCoord1'
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'shadowCoord'
+      semantic_label: 'TexCoord2'
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      semantic_label: 'Normal'
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'tangent'
+      semantic_label: 'Tangent'
+    StructField
+      interpolation_modifier: 'sample'
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'bitangent'
+      semantic_label: 'Bitangent'
+StmtStructDef
+  name: 'MRT'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'Color'
+      semantic_label: 'SV_Target0'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'Normal'
+      semantic_label: 'SV_Target1'
+StmtFuncDef
+  return_type:
+    UserDefinedType
+      name: 'MRT'
+  name: 'main'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        UserDefinedType
+          name: 'VSOutput'
+      name: 'vsOutput'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'MRT'
+      name: 'mrt'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'uint2'
+      name: 'pixelPos'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'uint2'
+          args:
+            ExprFieldAccess
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsOutput'
+                  field_name: 'position'
+              field_name: 'xy'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'diffuseAlbedo'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'texDiffuse'
+              field_name: 'Sample'
+          args:
+            ExprIdentifier
+              name: 'defaultSampler'
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'uv'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'colorSum'
+      array_size: None
+      binding: None
+      initializer:
+        ExprIntLit
+          value: 0
+    StmtScope
+      statements:
+        StmtVarDef
+          flags: None
+          type:
+            BuiltinType
+              name: 'float'
+          name: 'ao'
+          array_size: None
+          binding: None
+          initializer:
+            ExprArraySubscript
+              left:
+                ExprIdentifier
+                  name: 'texSSAO'
+              right:
+                ExprIdentifier
+                  name: 'pixelPos'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '+='
+              left:
+                ExprIdentifier
+                  name: 'colorSum'
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'ApplyAmbientLight'
+                  args:
+                    ExprIdentifier
+                      name: 'diffuseAlbedo'
+                    ExprIdentifier
+                      name: 'ao'
+                    ExprIdentifier
+                      name: 'AmbientColor'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'gloss'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFloatLit
+          value: 128.0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'normal'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtScope
+      statements:
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '='
+              left:
+                ExprIdentifier
+                  name: 'normal'
+              right:
+                ExprBinary
+                  op: '-'
+                  left:
+                    ExprBinary
+                      op: '*'
+                      left:
+                        ExprFunctionCall
+                          left:
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'texNormal'
+                              field_name: 'Sample'
+                          args:
+                            ExprIdentifier
+                              name: 'defaultSampler'
+                            ExprFieldAccess
+                              left:
+                                ExprIdentifier
+                                  name: 'vsOutput'
+                              field_name: 'uv'
+                      right:
+                        ExprFloatLit
+                          value: 2.0
+                  right:
+                    ExprFloatLit
+                      value: 1.0
+        StmtExpr
+          expr:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'AntiAliasSpecular'
+              args:
+                ExprIdentifier
+                  name: 'normal'
+                ExprIdentifier
+                  name: 'gloss'
+        StmtVarDef
+          flags: None
+          type:
+            UserDefinedType
+              name: 'float3x3'
+          name: 'tbn'
+          array_size: None
+          binding: None
+          initializer:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'float3x3'
+              args:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'normalize'
+                  args:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'vsOutput'
+                      field_name: 'tangent'
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'normalize'
+                  args:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'vsOutput'
+                      field_name: 'bitangent'
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'normalize'
+                  args:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'vsOutput'
+                      field_name: 'normal'
+        StmtExpr
+          expr:
+            ExprAssignment
+              op: '='
+              left:
+                ExprIdentifier
+                  name: 'normal'
+              right:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'normalize'
+                  args:
+                    ExprFunctionCall
+                      left:
+                        ExprIdentifier
+                          name: 'mul'
+                      args:
+                        ExprIdentifier
+                          name: 'normal'
+                        ExprIdentifier
+                          name: 'tbn'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'specularAlbedo'
+      array_size: None
+      binding: None
+      initializer:
+        ExprConstructorCall
+          type:
+            BuiltinType
+              name: 'float3'
+          args:
+            ExprFloatLit
+              value: 0.56
+            ExprFloatLit
+              value: 0.56
+            ExprFloatLit
+              value: 0.56
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float'
+      name: 'specularMask'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFieldAccess
+          left:
+            ExprFunctionCall
+              left:
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'texSpecular'
+                  field_name: 'Sample'
+              args:
+                ExprIdentifier
+                  name: 'defaultSampler'
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsOutput'
+                  field_name: 'uv'
+          field_name: 'g'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'normalize'
+          args:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'viewDir'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '+='
+          left:
+            ExprIdentifier
+              name: 'colorSum'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'ApplyDirectionalLight'
+              args:
+                ExprIdentifier
+                  name: 'diffuseAlbedo'
+                ExprIdentifier
+                  name: 'specularAlbedo'
+                ExprIdentifier
+                  name: 'specularMask'
+                ExprIdentifier
+                  name: 'gloss'
+                ExprIdentifier
+                  name: 'normal'
+                ExprIdentifier
+                  name: 'viewDir'
+                ExprIdentifier
+                  name: 'SunDirection'
+                ExprIdentifier
+                  name: 'SunColor'
+                ExprFieldAccess
+                  left:
+                    ExprIdentifier
+                      name: 'vsOutput'
+                  field_name: 'shadowCoord'
+                ExprIdentifier
+                  name: 'texShadow'
+    StmtExpr
+      expr:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'ShadeLights'
+          args:
+            ExprIdentifier
+              name: 'colorSum'
+            ExprIdentifier
+              name: 'pixelPos'
+            ExprIdentifier
+              name: 'diffuseAlbedo'
+            ExprIdentifier
+              name: 'specularAlbedo'
+            ExprIdentifier
+              name: 'specularMask'
+            ExprIdentifier
+              name: 'gloss'
+            ExprIdentifier
+              name: 'normal'
+            ExprIdentifier
+              name: 'viewDir'
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'worldPos'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'mrt'
+              field_name: 'Normal'
+          right:
+            ExprIdentifier
+              name: 'normal'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'mrt'
+              field_name: 'Color'
+          right:
+            ExprIdentifier
+              name: 'colorSum'
+    StmtReturn
+      value:
+        ExprIdentifier
+          name: 'mrt'

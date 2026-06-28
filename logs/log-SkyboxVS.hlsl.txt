@@ -1,0 +1,425 @@
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'defaultSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 10
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerComparisonState'
+  name: 'shadowSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 11
+      space: 0
+  initializer: None
+StmtVarDef
+  flags: None
+  type:
+    BuiltinType
+      name: 'SamplerState'
+  name: 'cubeMapSampler'
+  array_size: None
+  binding:
+    ResourceBinding
+      kind: 's'
+      number: 12
+      space: 0
+  initializer: None
+StmtFuncDef
+  return_type:
+    BuiltinType
+      name: 'uint'
+  name: 'HashTriangleID'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'vertexID'
+      semantic_label: None
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 0
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'Index2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'EvaluateAttributeAtVertex'
+          args:
+            ExprIdentifier
+              name: 'vertexID'
+            ExprIntLit
+              value: 2
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I0'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Min3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I1'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Med3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'I2'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: '__XB_Max3_U32'
+          args:
+            ExprIdentifier
+              name: 'Index0'
+            ExprIdentifier
+              name: 'Index1'
+            ExprIdentifier
+              name: 'Index2'
+    StmtReturn
+      value:
+        ExprBinary
+          op: '|'
+          left:
+            ExprBinary
+              op: '|'
+              left:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I2'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 16
+              right:
+                ExprBinary
+                  op: '<<'
+                  left:
+                    ExprBinary
+                      op: '&'
+                      left:
+                        ExprIdentifier
+                          name: 'I1'
+                      right:
+                        ExprIntLit
+                          value: 255
+                  right:
+                    ExprIntLit
+                      value: 8
+          right:
+            ExprBinary
+              op: '&'
+              left:
+                ExprIdentifier
+                  name: 'I0'
+              right:
+                ExprIntLit
+                  value: 4278190335
+StmtShaderConstantDef
+  kind: 'cbuffer'
+  name: 'VSConstants'
+  binding:
+    ResourceBinding
+      kind: 'b'
+      number: 0
+      space: 0
+  fields:
+    BufferField
+      type:
+        BuiltinType
+          name: 'float4x4'
+      name: 'ProjInverse'
+    BufferField
+      type:
+        UserDefinedType
+          name: 'float3x3'
+      name: 'ViewInverse'
+StmtStructDef
+  name: 'VSOutput'
+  fields:
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'position'
+      semantic_label: 'SV_POSITION'
+    StructField
+      interpolation_modifier: None
+      type:
+        BuiltinType
+          name: 'float3'
+      name: 'viewDir'
+      semantic_label: 'TEXCOORD3'
+StmtFuncDef
+  return_type:
+    UserDefinedType
+      name: 'VSOutput'
+  name: 'main'
+  args:
+    FuncParam
+      input_modifier: None
+      type:
+        BuiltinType
+          name: 'uint'
+      name: 'VertID'
+      semantic_label: 'SV_VertexID'
+  semantic_label: None
+  statements:
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float2'
+      name: 'ScreenUV'
+      array_size: None
+      binding: None
+      initializer:
+        ExprConstructorCall
+          type:
+            BuiltinType
+              name: 'float2'
+          args:
+            ExprBinary
+              op: '&'
+              left:
+                ExprFunctionCall
+                  left:
+                    ExprIdentifier
+                      name: 'uint2'
+                  args:
+                    ExprIdentifier
+                      name: 'VertID'
+                    ExprBinary
+                      op: '<<'
+                      left:
+                        ExprIdentifier
+                          name: 'VertID'
+                      right:
+                        ExprIntLit
+                          value: 1
+              right:
+                ExprIntLit
+                  value: 2
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'ProjectedPos'
+      array_size: None
+      binding: None
+      initializer:
+        ExprConstructorCall
+          type:
+            BuiltinType
+              name: 'float4'
+          args:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'lerp'
+              args:
+                ExprConstructorCall
+                  type:
+                    BuiltinType
+                      name: 'float2'
+                  args:
+                    ExprUnary
+                      op: '-'
+                      right:
+                        ExprIntLit
+                          value: 1
+                    ExprIntLit
+                      value: 1
+                ExprConstructorCall
+                  type:
+                    BuiltinType
+                      name: 'float2'
+                  args:
+                    ExprIntLit
+                      value: 1
+                    ExprUnary
+                      op: '-'
+                      right:
+                        ExprIntLit
+                          value: 1
+                ExprIdentifier
+                  name: 'ScreenUV'
+            ExprIntLit
+              value: 0
+            ExprIntLit
+              value: 1
+    StmtVarDef
+      flags: None
+      type:
+        BuiltinType
+          name: 'float4'
+      name: 'PosViewSpace'
+      array_size: None
+      binding: None
+      initializer:
+        ExprFunctionCall
+          left:
+            ExprIdentifier
+              name: 'mul'
+          args:
+            ExprIdentifier
+              name: 'ProjInverse'
+            ExprIdentifier
+              name: 'ProjectedPos'
+    StmtVarDef
+      flags: None
+      type:
+        UserDefinedType
+          name: 'VSOutput'
+      name: 'vsOutput'
+      array_size: None
+      binding: None
+      initializer: None
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'position'
+          right:
+            ExprIdentifier
+              name: 'ProjectedPos'
+    StmtExpr
+      expr:
+        ExprAssignment
+          op: '='
+          left:
+            ExprFieldAccess
+              left:
+                ExprIdentifier
+                  name: 'vsOutput'
+              field_name: 'viewDir'
+          right:
+            ExprFunctionCall
+              left:
+                ExprIdentifier
+                  name: 'mul'
+              args:
+                ExprIdentifier
+                  name: 'ViewInverse'
+                ExprBinary
+                  op: '/'
+                  left:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'PosViewSpace'
+                      field_name: 'xyz'
+                  right:
+                    ExprFieldAccess
+                      left:
+                        ExprIdentifier
+                          name: 'PosViewSpace'
+                      field_name: 'w'
+    StmtReturn
+      value:
+        ExprIdentifier
+          name: 'vsOutput'

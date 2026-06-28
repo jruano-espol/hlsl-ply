@@ -909,4 +909,34 @@ def p_opt_expression(p):
 def p_error(p):
     parse_error(p, p)
 
+def str_from_ast(statements: list[Stmt]):
+    def walk(node, level=0):
+        indent = "  " * level
+        if isinstance(node, list):
+            lines = []
+            for item in node:
+                lines.extend(walk(item, level))
+            return lines
+        if isinstance(node, (str, int, float, bool)) or node is None:
+            return [f"{indent}{node!r}"]
+        if hasattr(node, "__dict__"):
+            lines = [f"{indent}{type(node).__name__}"]
+            for name, value in vars(node).items():
+                if isinstance(value, list):
+                    if not value:
+                        lines.append(f"{indent}  {name}: []")
+                    else:
+                        lines.append(f"{indent}  {name}:")
+                        for item in value:
+                            lines.extend(walk(item, level + 2))
+                elif isinstance(value, (str, int, float, bool)) or value is None:
+                    lines.append(f"{indent}  {name}: {value!r}")
+                else:
+                    lines.append(f"{indent}  {name}:")
+                    lines.extend(walk(value, level + 2))
+            return lines
+        return [f"{indent}{node!r}"]
+
+    return "\n".join(walk(statements))
+
 parser = yacc.yacc(start="program", debug=True)
